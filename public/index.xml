@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>My New Hugo Site</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on My New Hugo Site</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Awareness</title>
+      <link>http://localhost:1313/awareness/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/awareness/</guid>
+      <description>&lt;h1 id=&#34;why-this-matters&#34;&gt;Why this matters&lt;/h1&gt;&#xA;&lt;p&gt;You just entered your password into a random website.&lt;/p&gt;&#xA;&lt;p&gt;This campaign demonstrates how easily credentials can be collected through trust and familiar design patterns.&lt;/p&gt;&#xA;&lt;h2 id=&#34;important&#34;&gt;Important&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Your password was NOT stored in plaintext&lt;/li&gt;&#xA;&lt;li&gt;Only a partial anonymous hash was processed&lt;/li&gt;&#xA;&lt;li&gt;This was an educational awareness campaign&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;what-you-should-do-now&#34;&gt;What you should do now&lt;/h2&gt;&#xA;&lt;p&gt;If this was a real password you still use:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Change it immediately&lt;/li&gt;&#xA;&lt;li&gt;Never reuse passwords&lt;/li&gt;&#xA;&lt;li&gt;Use a password manager&lt;/li&gt;&#xA;&lt;li&gt;Enable MFA wherever possible&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h2 id=&#34;remember&#34;&gt;Remember&lt;/h2&gt;&#xA;&lt;p&gt;Even professional-looking websites can be malicious.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
