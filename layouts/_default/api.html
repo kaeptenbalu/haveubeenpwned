@@ -188,47 +188,6 @@ footer {
     <div class="api-section">
       <h2>Endpoints</h2>
 
-      <!-- /check -->
-      <div class="endpoint">
-        <h3>
-          <span class="method">POST</span>
-          /check
-        </h3>
-        <p style="color: #9cb1c2; margin: 15px 0;">
-          Interactive password check - returns HTML awareness page (perfect for curl usage)
-        </p>
-
-        <h4 style="margin-top: 20px; font-size: 1.1rem;">Request Body:</h4>
-        <table class="param-table">
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Type</th>
-              <th>Required</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>password</code></td>
-              <td>string</td>
-              <td>Yes</td>
-              <td>The password to analyze</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h4 style="margin-top: 20px; font-size: 1.1rem;">Example Request:</h4>
-        <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this, 0)">Copy</button>
-          <code>curl -X POST https://muddy-scene-9bdf.haveubeenpwned.workers.dev/check \
-  -H "Content-Type: application/json" \
-  -d '{"password": "MyP@ssw0rd123"}'</code>
-        </div>
-
-        <h4 style="margin-top: 20px; font-size: 1.1rem;">Response:</h4>
-        <p style="color: #9cb1c2;">Returns HTML awareness page with password analysis and security tips</p>
-      </div>
 
       <!-- /analyze -->
       <div class="endpoint">
@@ -327,35 +286,79 @@ footer {
     <!-- BASH SCRIPT EXAMPLE -->
     <div class="api-section">
       <h2>Bash Script Example</h2>
-      <p style="color: #9cb1c2;">Complete script to check a password from command line:</p>
+      <p style="color: #9cb1c2;">
+        <strong>⚠️ IMPORTANT:</strong> Never send passwords to the API! Analyze locally and send only metadata.
+      </p>
+      <p style="color: #9cb1c2;">Complete script to analyze a password and submit anonymized data:</p>
 
       <div class="code-block">
         <button class="copy-btn" onclick="copyCode(this, 3)">Copy</button>
         <code>#!/bin/bash
 
-# Simple password check
+# Password to analyze (stays local, NEVER sent to server!)
 PASSWORD="MyP@ssw0rd123"
 
-curl -X POST https://muddy-scene-9bdf.haveubeenpwned.workers.dev/check \
-  -H "Content-Type: application/json" \
-  -d "{\"password\": \"$PASSWORD\"}" \
-  -o awareness.html
+# Analyze locally
+LENGTH=${#PASSWORD}
+HAS_NUMBER=$(echo "$PASSWORD" | grep -q '[0-9]' && echo "true" || echo "false")
+HAS_SPECIAL=$(echo "$PASSWORD" | grep -q '[^A-Za-z0-9]' && echo "true" || echo "false")
 
-echo "Results saved to awareness.html"
-open awareness.html  # macOS
-# xdg-open awareness.html  # Linux
-# start awareness.html  # Windows</code>
+# Calculate complexity locally
+HAS_UPPER=$(echo "$PASSWORD" | grep -q '[A-Z]' && echo "true" || echo "false")
+HAS_LOWER=$(echo "$PASSWORD" | grep -q '[a-z]' && echo "true" || echo "false")
+
+if [[ "$HAS_NUMBER" == "true" && "$HAS_SPECIAL" == "true" && "$HAS_UPPER" == "true" && "$HAS_LOWER" == "true" ]]; then
+  COMPLEXITY="high"
+elif [[ ("$HAS_NUMBER" == "true" || "$HAS_SPECIAL" == "true") && ("$HAS_UPPER" == "true" || "$HAS_LOWER" == "true") ]]; then
+  COMPLEXITY="medium"
+else
+  COMPLEXITY="low"
+fi
+
+# Determine rating
+if [[ $LENGTH -ge 12 && "$COMPLEXITY" == "high" ]]; then
+  RATING="Strong"
+elif [[ $LENGTH -ge 8 && "$COMPLEXITY" != "low" ]]; then
+  RATING="Medium"
+else
+  RATING="Weak"
+fi
+
+# Send ONLY anonymized metadata to API (password never leaves your machine!)
+curl -X POST https://muddy-scene-9bdf.haveubeenpwned.workers.dev/analyze \
+  -H "Content-Type: application/json" \
+  -d "{\"length\": $LENGTH, \"has_number\": $HAS_NUMBER, \"has_special\": $HAS_SPECIAL}"
+
+# Display results locally
+echo ""
+echo "=== Local Password Analysis ==="
+echo "Length: $LENGTH"
+echo "Has Numbers: $HAS_NUMBER"
+echo "Has Special Chars: $HAS_SPECIAL"
+echo "Complexity: $COMPLEXITY"
+echo "Rating: $RATING"
+echo ""
+echo "Note: Your password was NOT sent to the server!"
+echo "Only anonymized metadata was submitted for research."</code>
       </div>
     </div>
 
     <!-- PRIVACY -->
     <div class="api-section">
       <h2>Privacy & Data Collection</h2>
+      <div style="background: rgba(231,76,60,0.15); border: 2px solid #e74c3c; border-radius: 12px; padding: 20px; margin-bottom: 20px;">
+        <strong style="color: #e74c3c; font-size: 1.2rem;">⚠️ CRITICAL: Never send passwords to the API!</strong>
+        <p style="color: #f6f8fa; margin-top: 10px;">
+          Always analyze passwords <strong>locally on your machine</strong> and send only anonymized metadata (length, has_number, has_special).
+          Sending actual passwords defeats the purpose of this security tool!
+        </p>
+      </div>
       <ul style="color: #9cb1c2; font-size: 1.1rem; line-height: 1.8;">
-        <li>Passwords are <strong>never stored or logged</strong></li>
-        <li>Only anonymized metadata is collected (length buckets, complexity, time of day)</li>
-        <li>Data cannot be linked back to individual users</li>
+        <li><strong>Passwords must NEVER be sent to the API</strong> - analyze them locally first</li>
+        <li>Only anonymized metadata is accepted (length buckets, complexity, time of day)</li>
+        <li>Data cannot be linked back to individual users or passwords</li>
         <li>All data is used for research and displayed publicly on the <a href="/research/" style="color: #1d72a7;">Research page</a></li>
+        <li>Client-side analysis ensures your password never leaves your machine</li>
       </ul>
     </div>
 
