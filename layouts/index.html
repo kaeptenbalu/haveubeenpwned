@@ -269,12 +269,10 @@ async function loadStats() {
     const res = await fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/stats");
     const data = await res.json();
 
-    let total = 0;
-    for (let k in data) total += data[k];
-
-    document.getElementById("pwnedCount").innerText = total.toLocaleString();
+    document.getElementById("pwnedCount").innerText = data.total.toLocaleString();
 
   } catch(e) {
+    console.error("Stats error:", e);
     document.getElementById("pwnedCount").innerText = "0";
   }
 }
