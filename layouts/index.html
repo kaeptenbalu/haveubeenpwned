@@ -199,8 +199,8 @@ footer {
       <div class="col-md-4">
         <div class="card text-center p-4">
 
-          <div class="display-5" id="pwnedCount">...</div>
-          <p class="text-primary mb-0">passwords</p>
+          <div class="display-5">13,683,714,892</div>
+          <p class="text-primary mb-0">pwned accounts</p>
 
         </div>
       </div>
@@ -258,21 +258,7 @@ document.getElementById("password").addEventListener("keypress", e => {
   if (e.key === "Enter") submitPassword();
 });
 
-// ===== LOAD STATS =====
-async function loadStats() {
-  try {
-    const res = await fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/stats");
-    const data = await res.json();
-
-    document.getElementById("pwnedCount").innerText = data.total.toLocaleString();
-
-  } catch(e) {
-    console.error("Stats error:", e);
-    document.getElementById("pwnedCount").innerText = "0";
-  }
-}
-
-loadStats();
+// Stats loading removed - using static number on homepage
 
 </script>
 
