@@ -10,8 +10,13 @@ This campaign demonstrates how easily credentials can be collected through trust
 
 ## Important
 
-- Your password was NOT stored
-- For research reasons the password length is stored
+- **Your password was NOT stored** - we never save the actual password
+- **For research purposes, we collect anonymized metadata:**
+  - Password length (grouped: 0-7, 8-12, 13+ characters)
+  - Time of submission (morning, afternoon, evening)
+  - Character composition (contains numbers: yes/no, contains special characters: yes/no)
+  - Complexity level (low, medium, high)
+- **This data cannot be linked back to you** - it's purely statistical
 - This is an educational awareness campaign
 
 ## ⚠️ Storing Passwords in Plaintext
