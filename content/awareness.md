@@ -11,17 +11,29 @@ This campaign demonstrates how easily credentials can be collected through trust
 ## Important
 
 - Your password was NOT stored
-- For research reasons the password lenght is stored
+- For research reasons the password length is stored
 - This is an educational awareness campaign
+
+## ⚠️ Storing Passwords in Plaintext
+
+**NEVER store passwords in plaintext!** Using CSV files or text files to store passwords is extremely dangerous:
+
+- Anyone with access to your computer can read them
+- Malware can easily steal them
+- If your device is lost or stolen, all accounts are compromised
+- Cloud sync services may expose them
+
+**Use a password manager instead** (e.g., Bitwarden, 1Password, KeePass)
 
 ## What you should do now
 
 If this was a real password you still use:
 
-1. Even the password is not stores you should Change the password :)
-2. Never reuse passwords
-3. Use a password manager
-4. Enable MFA wherever possible
+1. Even though the password is not stored, you should change the password :)
+2. Never reuse passwords across different services
+3. Use a password manager to generate and store strong, unique passwords
+4. Enable MFA (Multi-Factor Authentication) wherever possible
+5. **Stop storing passwords in CSV files or plaintext!**
 
 ## Remember
 

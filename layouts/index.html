@@ -254,7 +254,37 @@ async function submitPassword() {
   }
 
   try {
+    // Analyze and send to worker
     await analyzePassword(pw);
+
+    // Save single password analysis to localStorage
+    const analysis = {
+      length: pw.length,
+      hasNumber: /\d/.test(pw),
+      hasSpecial: /[^A-Za-z0-9]/.test(pw),
+      hasUpper: /[A-Z]/.test(pw),
+      hasLower: /[a-z]/.test(pw)
+    };
+
+    let complexity = 'low';
+    if (analysis.hasNumber && analysis.hasSpecial && analysis.hasUpper && analysis.hasLower) complexity = 'high';
+    else if ((analysis.hasNumber || analysis.hasSpecial) && (analysis.hasUpper || analysis.hasLower)) complexity = 'medium';
+
+    let rating = 'Weak';
+    if (pw.length >= 12 && complexity === 'high') rating = 'Strong';
+    else if (pw.length >= 8 && complexity !== 'low') rating = 'Medium';
+
+    const singleResult = [{
+      username: 'Single Check',
+      password: pw,
+      length: pw.length,
+      hasNumber: analysis.hasNumber,
+      hasSpecial: analysis.hasSpecial,
+      complexity: complexity,
+      rating: rating
+    }];
+
+    localStorage.setItem('bulkResults', JSON.stringify(singleResult));
   } catch(e) {
     console.error(e);
   }

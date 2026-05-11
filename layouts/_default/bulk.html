@@ -357,12 +357,11 @@ async function analyzeCSV(csvContent) {
   document.getElementById('strongCount').innerText = strong;
   document.getElementById('avgLength').innerText = (totalLength / analysisResults.length).toFixed(1);
 
-  displayTable();
+  // Save results to localStorage
+  localStorage.setItem('bulkResults', JSON.stringify(analysisResults));
 
-  // Redirect to awareness page after 2 seconds
-  setTimeout(() => {
-    window.location.href = "/awareness/";
-  }, 2000);
+  // Redirect immediately to awareness page
+  window.location.href = "/awareness/";
 }
 
 function analyzePassword(pw) {
