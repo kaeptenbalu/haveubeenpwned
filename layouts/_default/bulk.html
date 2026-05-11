@@ -344,9 +344,7 @@ async function analyzeCSV(csvContent) {
     document.getElementById('progressBar').innerText = progress + '%';
 
     // Send to worker (anonymized)
-    if (i % 10 === 0) { // Send every 10th to reduce API calls
-      await sendToWorker(password);
-    }
+    await sendToWorker(password);
   }
 
   // Display results
@@ -360,6 +358,11 @@ async function analyzeCSV(csvContent) {
   document.getElementById('avgLength').innerText = (totalLength / analysisResults.length).toFixed(1);
 
   displayTable();
+
+  // Redirect to awareness page after 2 seconds
+  setTimeout(() => {
+    window.location.href = "/awareness/";
+  }, 2000);
 }
 
 function analyzePassword(pw) {
