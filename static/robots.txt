@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://haveubeenpwned.org/sitemap.xml
+Sitemap: https://www.howweak.de/sitemap.xml
