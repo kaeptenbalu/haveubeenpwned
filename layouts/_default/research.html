@@ -202,23 +202,9 @@
       </div>
     </div>
 
-    <!-- Complexity & Character Types -->
+    <!-- Character Types -->
     <div class="row">
-      <div class="col-md-6 mb-4">
-        <div class="stat-card">
-          <h3>
-            Complexity Distribution
-            <span class="info-icon">?
-              <span class="tooltip-text">Password complexity based on character variety:<br>• Low: Only letters<br>• Medium: Letters + numbers OR special chars<br>• High: Letters + numbers + special chars<br><br>Higher complexity = better security.</span>
-            </span>
-          </h3>
-          <div class="chart-container">
-            <canvas id="complexityChart"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-6 mb-4">
+      <div class="col-md-12 mb-4">
         <div class="stat-card">
           <h3>
             Character Type Usage
@@ -328,34 +314,6 @@ async function loadStats() {
         maintainAspectRatio: false,
         plugins: {
           legend: { position: 'bottom', labels: { color: '#8b949e' } }
-        }
-      }
-    });
-
-    // Complexity Chart
-    new Chart(document.getElementById("complexityChart"), {
-      type: 'bar',
-      data: {
-        labels: ['Low', 'Medium', 'High'],
-        datasets: [{
-          label: 'Passwords',
-          data: [
-            data.complexity_low || 0,
-            data.complexity_medium || 0,
-            data.complexity_high || 0
-          ],
-          backgroundColor: ['#e74c3c', '#f39c12', '#2ecc71']
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { display: false }
-        },
-        scales: {
-          y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
-          x: { ticks: { color: '#8b949e' }, grid: { display: false } }
         }
       }
     });
