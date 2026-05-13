@@ -1,0 +1,21 @@
+# Our security address
+Contact: mailto:security@howweak.de
+
+# Our security policy
+Policy: https://howweak.de/about/
+
+# Preferred languages
+Preferred-Languages: en, de
+
+# Expires one year from now (update annually)
+Expires: 2027-05-13T23:59:59.000Z
+
+# Security disclosure policy
+# We take responsible disclosure seriously and are grateful for any
+# security vulnerabilities reported to us. We are committed to working
+# with security researchers to verify and address any potential issues.
+#
+# Please report security vulnerabilities to: security@howweak.de
+#
+# We appreciate your efforts to responsibly disclose your findings and
+# will make every effort to acknowledge your contributions.
