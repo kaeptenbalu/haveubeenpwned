@@ -161,7 +161,7 @@ function analyzePassword(pw) {
     has_special: /[^A-Za-z0-9]/.test(pw)
   };
 
-  return fetch("https://muddy-scene-9bdf.howweak.workers.dev/analyze", {
+  return fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/analyze", {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(payload)

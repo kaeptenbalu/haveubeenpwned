@@ -409,7 +409,7 @@ function displayTable() {
 
 async function sendToWorker(password) {
   try {
-    await fetch("https://muddy-scene-9bdf.howweak.workers.dev/analyze", {
+    await fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/analyze", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
