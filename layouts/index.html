@@ -273,6 +273,28 @@ async function submitPassword() {
 
   localStorage.setItem('passwordAnalysis', JSON.stringify(analysis));
 
+  // Send anonymous statistics to worker (NO password, only analysis results)
+  try {
+    await fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/analyze", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        length: analysis.length,
+        has_upper: analysis.hasUpper,
+        has_lower: analysis.hasLower,
+        has_number: analysis.hasNumber,
+        has_special: analysis.hasSpecial,
+        has_repeating: analysis.hasRepeatingChars,
+        has_sequential: analysis.hasSequentialNumbers,
+        score: analysis.score,
+        is_known_weak: analysis.isKnownWeak
+      })
+    });
+  } catch(e) {
+    // Don't block on stats error
+    console.warn("Failed to send stats:", e);
+  }
+
   window.location.href = "/result/";
   } catch(error) {
     console.error("Error in submitPassword:", error);
