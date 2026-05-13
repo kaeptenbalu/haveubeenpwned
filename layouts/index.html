@@ -167,14 +167,31 @@ async function submitPassword() {
       hasLower: /[a-z]/.test(pw)
     };
 
+    // Complexity calculation
     let complexity = 'low';
-    if (analysis.hasNumber && analysis.hasSpecial && analysis.hasUpper && analysis.hasLower) complexity = 'high';
-    else if ((analysis.hasNumber || analysis.hasSpecial) && (analysis.hasUpper || analysis.hasLower)) complexity = 'medium';
+    if (analysis.hasNumber && analysis.hasSpecial && analysis.hasUpper && analysis.hasLower) {
+      complexity = 'high';
+    } else if ((analysis.hasNumber || analysis.hasSpecial) && (analysis.hasUpper || analysis.hasLower)) {
+      complexity = 'medium';
+    }
 
+    // Rating calculation with strict requirements
     let rating = 'Weak';
-    if (pw.length >= 12 && complexity === 'high') rating = 'Strong';
-    else if (pw.length >= 12 && complexity === 'medium') rating = 'Medium';
-    else if (pw.length >= 8 && complexity !== 'low') rating = 'Medium';
+
+    // Strong: minimum 12 characters AND all character types (uppercase, lowercase, numbers, special chars)
+    if (pw.length >= 12 &&
+        analysis.hasUpper &&
+        analysis.hasLower &&
+        analysis.hasNumber &&
+        analysis.hasSpecial) {
+      rating = 'Strong';
+    }
+    // Medium: 8-11 characters with high complexity OR 12+ characters with medium complexity
+    else if ((pw.length >= 8 && pw.length < 12 && complexity === 'high') ||
+             (pw.length >= 12 && complexity === 'medium')) {
+      rating = 'Medium';
+    }
+    // Weak: everything else (short passwords, low complexity, missing character types)
 
     const singleResult = [{
       username: 'Single Check',
