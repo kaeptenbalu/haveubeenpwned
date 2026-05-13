@@ -156,16 +156,17 @@ async function checkWeakPassword(hash) {
 
 // ===== SUBMIT =====
 async function submitPassword() {
-  const pw = document.getElementById("password").value;
+  try {
+    const pw = document.getElementById("password").value;
 
-  if (!pw) {
-    alert("Enter password");
-    return;
-  }
+    if (!pw) {
+      alert("Enter password");
+      return;
+    }
 
-  // Generate hash and check against weak password list
-  const hash = await hashPassword(pw);
-  const isKnownWeak = await checkWeakPassword(hash);
+    // Generate hash and check against weak password list
+    const hash = await hashPassword(pw);
+    const isKnownWeak = await checkWeakPassword(hash);
 
   // Analyze password based on current security standards
   const analysis = {
@@ -273,6 +274,10 @@ async function submitPassword() {
   localStorage.setItem('passwordAnalysis', JSON.stringify(analysis));
 
   window.location.href = "/result/";
+  } catch(error) {
+    console.error("Error in submitPassword:", error);
+    alert("An error occurred. Please try again.");
+  }
 }
 
 // ===== ENTER KEY =====
