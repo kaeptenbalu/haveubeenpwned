@@ -34,10 +34,45 @@
 
 <section class="content">
   <div class="container">
-    <h1>About This Project</h1>
-    <p style="color: #8b949e; font-size: 1.1rem; max-width: 700px; margin: 0 auto 20px;">This is an educational awareness project to help people understand password security and common patterns in password creation.</p>
-    <p style="color: #8b949e; font-size: 1.1rem; max-width: 700px; margin: 0 auto 20px;">No passwords are stored or logged. All analysis happens client-side and only anonymized statistics are collected.</p>
-    <p style="color: #8b949e; font-size: 1.1rem; max-width: 700px; margin: 0 auto 20px;">Built with Hugo, Cloudflare Workers, and open-source technologies.</p>
+    <h1>About HowWeak</h1>
+
+    <p style="color: #c9d1d9; font-size: 1.2rem; max-width: 750px; margin: 0 auto 40px; font-weight: 600;">
+      Free, open-source password security checker to help you evaluate the strength of your passwords.
+    </p>
+
+    <div style="text-align: left; max-width: 750px; margin: 0 auto;">
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">How It Works</h2>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        When you enter a password, a <strong style="color: #FFA500;">cryptographic hash</strong> (SHA-256) is generated in your browser.
+        Only this hash is sent to our Cloudflare Worker for analysis.
+      </p>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        The Worker compares the hash against millions of known weak passwords and evaluates password
+        strength based on length, complexity, and security best practices. The result is sent back to your browser.
+      </p>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">Privacy & Security</h2>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        <strong style="color: #FFA500;">Strict No-Log Policy:</strong> Your password is never transmitted or stored.
+        We only receive the hash, which cannot be reversed to reveal your original password.
+      </p>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        No logs are kept. No personal data is collected. Only anonymized statistics
+        (password length, complexity patterns) are stored for research purposes.
+      </p>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">Technology</h2>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        Built with <strong style="color: #FFA500;">Hugo</strong> (static site generator),
+        <strong style="color: #FFA500;">Cloudflare Workers</strong> (serverless backend),
+        and open-source technologies.
+      </p>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        Made in Germany 🇩🇪 · Open Source · Privacy-First
+      </p>
+
+    </div>
   </div>
 </section>
 
