@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Tips - HowWeak - Password Security Check</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+.tip-card {
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid #30363d;
+  border-left: 3px solid #FFA500;
+  border-radius: 6px;
+  padding: 30px;
+  margin-bottom: 25px;
+  transition: all 0.2s ease;
+}
+
+.tip-card:hover {
+  border-color: #FFA500;
+  transform: translateX(4px);
+}
+
+.tip-card h3 {
+  color: #c9d1d9;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.tip-card p {
+  color: #8b949e;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 0;
+}
+
+.tip-number {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 165, 0, 0.2);
+  border: 1px solid #FFA500;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #FFA500;
+  margin-right: 15px;
+  float: left;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg container-fluid">
+  <a class="navbar-brand" href="/">
+    <img src="/img/logo.png" alt="HowWeak Logo" class="nav-logo">
+  </a>
+  <button class="navbar-toggler" style="border: 1px solid #30363d;" data-bs-toggle="collapse" data-bs-target="#nav">
+    <span style="color: #FFA500;">☰</span>
+  </button>
+  <div class="collapse navbar-collapse" id="nav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item"><a class="nav-link" href="/tips/">Security Tips</a></li>
+      <li class="nav-item"><a class="nav-link" href="/roadmap/">Roadmap</a></li>
+      <li class="nav-item"><a class="nav-link" href="/costs/">Costs</a></li>
+      <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
+      <li class="nav-item"><a class="nav-link" href="/research/">Research</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="content">
+  <div class="container">
+    <h1>Password Security Tips</h1>
+
+    <p style="color: #8b949e; font-size: 1.2rem; max-width: 750px; margin: 0 auto 50px; text-align: center;">
+      Essential best practices to keep your accounts safe and secure.
+    </p>
+
+    <div style="max-width: 800px; margin: 0 auto;">
+
+      <div class="tip-card">
+        <span class="tip-number">1</span>
+        <h3>Use Unique Passwords for Each Account</h3>
+        <p>
+          Never reuse passwords across different websites or services. If one account gets compromised,
+          attackers will try the same credentials everywhere else. Each account should have its own unique password.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">2</span>
+        <h3>Use a Password Manager</h3>
+        <p>
+          Password managers like Bitwarden, 1Password, or KeePass can generate and store strong, unique passwords
+          for you. You only need to remember one master password, and the manager handles the rest securely.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">3</span>
+        <h3>Enable Multi-Factor Authentication (MFA)</h3>
+        <p>
+          Whenever possible, enable MFA (also called 2FA) on your accounts. This adds an extra layer of security
+          beyond just your password, typically requiring a code from your phone or an authentication app.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">4</span>
+        <h3>Make Passwords Long and Complex</h3>
+        <p>
+          Aim for at least 12-16 characters. Use a mix of uppercase letters, lowercase letters, numbers,
+          and special characters. Longer passwords with variety are exponentially harder to crack.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">5</span>
+        <h3>Avoid Common Words and Patterns</h3>
+        <p>
+          Don't use dictionary words, names, dates, or simple patterns like "123456" or "password".
+          Attackers use these in their first attempts. Random combinations are much more secure.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">6</span>
+        <h3>Be Cautious Where You Enter Passwords</h3>
+        <p>
+          Always verify you're on the legitimate website before entering credentials. Check the URL carefully
+          for typos or suspicious domains. Be wary of entering passwords on unfamiliar sites or after clicking
+          links in emails.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">7</span>
+        <h3>Change Passwords After a Breach</h3>
+        <p>
+          If you hear about a data breach affecting a service you use, change your password immediately.
+          If you reused that password elsewhere, change it on those sites too.
+        </p>
+      </div>
+
+      <div class="tip-card">
+        <span class="tip-number">8</span>
+        <h3>Don't Share Your Passwords</h3>
+        <p>
+          Never share passwords via email, text message, or messaging apps. Legitimate companies will never
+          ask for your password. If you must share access, use proper account sharing features or password
+          manager sharing tools.
+        </p>
+      </div>
+
+    </div>
+
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="/" class="btn btn-primary" style="background: #238636; border: 1px solid rgba(240, 246, 252, 0.1); color: #ffffff; font-weight: 600; padding: 14px 32px; border-radius: 6px; text-decoration: none; display: inline-block;">
+        Check Your Password
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 HowWeak · Open Source Password Security
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
