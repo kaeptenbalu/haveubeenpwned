@@ -44,13 +44,27 @@
 
       <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">How It Works</h2>
       <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
-        When you enter a password, the <strong style="color: #FFA500;">complexity analysis</strong> (length, uppercase/lowercase letters,
-        numbers, special characters) happens entirely in your browser. Your password never leaves your device.
+        When you enter a password, the <strong style="color: #FFA500;">security analysis</strong> happens entirely in your browser.
+        Your password never leaves your device. The analysis checks multiple security criteria based on current standards (NIST, BSI).
       </p>
+
+      <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">Scoring Method</h2>
       <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
-        For the comparison against known weak passwords, a <strong style="color: #FFA500;">cryptographic hash</strong> (SHA-256)
-        is generated in your browser. Only this hash is sent to our Cloudflare Worker, where it's checked against millions
-        of known weak password hashes. The result is sent back to your browser.
+        Your password receives a score from <strong style="color: #FFA500;">0 to 100 points</strong> based on:
+      </p>
+      <ul style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px; list-style-position: inside;">
+        <li><strong style="color: #FFA500;">Length ≥ 8 characters:</strong> +20 points</li>
+        <li><strong style="color: #FFA500;">Length ≥ 12 characters:</strong> +20 points (additional)</li>
+        <li><strong style="color: #FFA500;">Length ≥ 16 characters:</strong> +10 points (additional)</li>
+        <li><strong style="color: #FFA500;">Uppercase letters (A-Z):</strong> +10 points</li>
+        <li><strong style="color: #FFA500;">Lowercase letters (a-z):</strong> +10 points</li>
+        <li><strong style="color: #FFA500;">Numbers (0-9):</strong> +10 points</li>
+        <li><strong style="color: #FFA500;">Special characters (!@#$%...):</strong> +15 points</li>
+        <li><strong style="color: #FFA500;">No repeating patterns:</strong> +5 points</li>
+      </ul>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        <strong style="color: #FFA500;">Maximum score: 100 points</strong><br>
+        85-100: Excellent Security | 70-84: Good Security | 50-69: Fair Security | 0-49: Poor Security
       </p>
 
       <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">Privacy & Security</h2>
