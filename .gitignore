@@ -15,3 +15,7 @@ Thumbs.db
 # Temporary
 *.tmp
 *.swp
+
+# Node
+node_modules/
+package-lock.json
