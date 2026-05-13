@@ -128,22 +128,6 @@
 <!-- SCRIPT -->
 <script>
 
-// ===== PASSWORD ANALYSIS =====
-function analyzePassword(pw) {
-
-  const payload = {
-    length: pw.length,
-    has_number: /\d/.test(pw),
-    has_special: /[^A-Za-z0-9]/.test(pw)
-  };
-
-  return fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/analyze", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(payload)
-  });
-}
-
 // ===== SUBMIT =====
 async function submitPassword() {
   const pw = document.getElementById("password").value;
@@ -153,63 +137,101 @@ async function submitPassword() {
     return;
   }
 
-  try {
-    // Analyze and send to worker
-    await analyzePassword(pw);
+  // Analyze password based on current security standards
+  const analysis = {
+    length: pw.length,
+    hasUpper: /[A-Z]/.test(pw),
+    hasLower: /[a-z]/.test(pw),
+    hasNumber: /\d/.test(pw),
+    hasSpecial: /[^A-Za-z0-9]/.test(pw),
+    hasRepeatingChars: /(.)\1{2,}/.test(pw), // 3+ same chars in a row
+    hasSequentialNumbers: /(012|123|234|345|456|567|678|789|890)/.test(pw),
 
-    // Save single password analysis to localStorage
-    const analysis = {
-      length: pw.length,
-      hasNumber: /\d/.test(pw),
-      hasSpecial: /[^A-Za-z0-9]/.test(pw),
-      hasUpper: /[A-Z]/.test(pw),
-      hasLower: /[a-z]/.test(pw)
-    };
+    // Recommendations based on checks
+    recommendations: []
+  };
 
-    // Complexity calculation
-    let complexity = 'low';
-    if (analysis.hasNumber && analysis.hasSpecial && analysis.hasUpper && analysis.hasLower) {
-      complexity = 'high';
-    } else if ((analysis.hasNumber || analysis.hasSpecial) && (analysis.hasUpper || analysis.hasLower)) {
-      complexity = 'medium';
-    }
-
-    // Rating calculation with strict requirements
-    let rating = 'Weak';
-
-    // Strong: minimum 12 characters AND all character types (uppercase, lowercase, numbers, special chars)
-    if (pw.length >= 12 &&
-        analysis.hasUpper &&
-        analysis.hasLower &&
-        analysis.hasNumber &&
-        analysis.hasSpecial) {
-      rating = 'Strong';
-    }
-    // Medium: 8-11 characters with high complexity OR 12+ characters with medium complexity
-    else if ((pw.length >= 8 && pw.length < 12 && complexity === 'high') ||
-             (pw.length >= 12 && complexity === 'medium')) {
-      rating = 'Medium';
-    }
-    // Weak: everything else (short passwords, low complexity, missing character types)
-
-    const singleResult = [{
-      username: 'Single Check',
-      password: pw,
-      length: pw.length,
-      hasNumber: analysis.hasNumber,
-      hasSpecial: analysis.hasSpecial,
-      complexity: complexity,
-      rating: rating
-    }];
-
-    localStorage.setItem('bulkResults', JSON.stringify(singleResult));
-  } catch(e) {
-    console.error(e);
+  // Check length (most important factor)
+  if (pw.length < 8) {
+    analysis.recommendations.push({
+      type: 'critical',
+      message: 'Password is too short. Use at least 8 characters, ideally 12 or more.'
+    });
+  } else if (pw.length < 12) {
+    analysis.recommendations.push({
+      type: 'warning',
+      message: 'Password length is acceptable, but 12+ characters is recommended for better security.'
+    });
   }
 
-  setTimeout(() => {
-    window.location.href = "/result/";
-  }, 700);
+  // Check character variety
+  if (!analysis.hasUpper) {
+    analysis.recommendations.push({
+      type: 'warning',
+      message: 'Add uppercase letters (A-Z) to increase password strength.'
+    });
+  }
+
+  if (!analysis.hasLower) {
+    analysis.recommendations.push({
+      type: 'warning',
+      message: 'Add lowercase letters (a-z) to increase password strength.'
+    });
+  }
+
+  if (!analysis.hasNumber) {
+    analysis.recommendations.push({
+      type: 'warning',
+      message: 'Add numbers (0-9) to increase password strength.'
+    });
+  }
+
+  if (!analysis.hasSpecial) {
+    analysis.recommendations.push({
+      type: 'warning',
+      message: 'Add special characters (!@#$%^&*) to increase password strength.'
+    });
+  }
+
+  // Check for patterns
+  if (analysis.hasRepeatingChars) {
+    analysis.recommendations.push({
+      type: 'info',
+      message: 'Avoid repeating characters (e.g., "aaa", "111").'
+    });
+  }
+
+  if (analysis.hasSequentialNumbers) {
+    analysis.recommendations.push({
+      type: 'info',
+      message: 'Avoid sequential numbers (e.g., "123", "456").'
+    });
+  }
+
+  // Overall score (0-100)
+  let score = 0;
+  if (pw.length >= 8) score += 20;
+  if (pw.length >= 12) score += 20;
+  if (pw.length >= 16) score += 10;
+  if (analysis.hasUpper) score += 10;
+  if (analysis.hasLower) score += 10;
+  if (analysis.hasNumber) score += 10;
+  if (analysis.hasSpecial) score += 15;
+  if (!analysis.hasRepeatingChars) score += 5;
+
+  analysis.score = score;
+
+  // Add positive feedback if no recommendations
+  if (analysis.recommendations.length === 0 && pw.length >= 12) {
+    analysis.recommendations.push({
+      type: 'success',
+      message: 'Excellent! Your password meets current security standards.'
+    });
+  }
+
+  localStorage.setItem('passwordAnalysis', JSON.stringify(analysis));
+
+  window.location.href = "/result/";
 }
 
 // ===== ENTER KEY =====
