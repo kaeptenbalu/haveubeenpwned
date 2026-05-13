@@ -26,7 +26,7 @@
 }
 
 .stat-card:hover {
-  border-color: #58a6ff;
+  border-color: #FFA500;
 }
 
 .stat-card h3 {
@@ -43,14 +43,14 @@
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: rgba(88, 166, 255, 0.2);
+  background: rgba(255, 165, 0, 0.2);
   border-radius: 50%;
   text-align: center;
   line-height: 20px;
   font-size: 14px;
   cursor: help;
   position: relative;
-  color: #58a6ff;
+  color: #FFA500;
 }
 
 .info-icon:hover .tooltip-text {
@@ -62,7 +62,7 @@
   visibility: hidden;
   opacity: 0;
   background: rgba(22, 27, 34, 0.98);
-  border: 1px solid #58a6ff;
+  border: 1px solid #FFA500;
   color: #c9d1d9;
   text-align: left;
   border-radius: 6px;
@@ -87,13 +87,13 @@
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #58a6ff transparent transparent transparent;
+  border-color: #FFA500 transparent transparent transparent;
 }
 
 .big-number {
   font-size: 3.5rem;
   font-weight: 700;
-  color: #58a6ff;
+  color: #FFA500;
   margin: 20px 0;
   font-family: 'JetBrains Mono', monospace;
 }
@@ -131,7 +131,7 @@
   </a>
 
   <button class="navbar-toggler" style="border: 1px solid #30363d;" data-bs-toggle="collapse" data-bs-target="#nav">
-    <span style="color: #58a6ff;">☰</span>
+    <span style="color: #FFA500;">☰</span>
   </button>
 
   <div class="collapse navbar-collapse" id="nav">
@@ -253,7 +253,7 @@
             Use our API endpoint to access real-time statistics data
           </p>
           <div style="background: rgba(22, 27, 34, 0.8); border: 1px solid #30363d; border-radius: 6px; padding: 20px; margin: 20px 0;">
-            <code style="color: #79c0ff; font-size: 16px;">
+            <code style="color: #FFA500; font-size: 16px;">
               https://muddy-scene-9bdf.haveubeenpwned.workers.dev/stats
             </code>
           </div>
@@ -294,7 +294,7 @@ async function loadStats() {
             data.time_afternoon || 0,
             data.time_evening || 0
           ],
-          backgroundColor: ['#58a6ff', '#79c0ff', '#a5d6ff']
+          backgroundColor: ['#FFA500', '#FFD700', '#FF8C00']
         }]
       },
       options: {
@@ -374,7 +374,7 @@ async function loadStats() {
             data.special_true || 0,
             data.special_false || 0
           ],
-          backgroundColor: ['#58a6ff', '#6e7681', '#79c0ff', '#6e7681']
+          backgroundColor: ['#FFA500', '#6e7681', '#FFD700', '#6e7681']
         }]
       },
       options: {

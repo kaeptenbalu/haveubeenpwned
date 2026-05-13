@@ -33,7 +33,7 @@ body::before {
 /* NAVBAR */
 .navbar {
   background: rgba(22, 27, 34, 0.95);
-  border-bottom: 1px solid rgba(88, 166, 255, 0.2);
+  border-bottom: 1px solid rgba(255, 165, 0, 0.2);
   border-radius: 0;
   padding: 1rem 2rem;
   backdrop-filter: blur(10px);
@@ -56,12 +56,12 @@ body::before {
   transform: translateX(-50%);
   width: 0;
   height: 2px;
-  background: #58a6ff;
+  background: linear-gradient(90deg, #FFA500, #FFD700);
   transition: width 0.2s ease;
 }
 
 .nav-link:hover {
-  color: #58a6ff !important;
+  color: #FFA500 !important;
 }
 
 .nav-link:hover::after {
@@ -71,7 +71,7 @@ body::before {
 .nav-logo-text {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #58a6ff;
+  color: #FFA500;
   letter-spacing: -0.02em;
   text-decoration: none;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
@@ -100,7 +100,7 @@ body::before {
   color: #ffffff;
   letter-spacing: -0.03em;
   margin-bottom: 10px;
-  background: linear-gradient(135deg, #58a6ff 0%, #79c0ff 100%);
+  background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -109,7 +109,7 @@ body::before {
 .logo-tagline {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.9rem;
-  color: #8b949e;
+  color: #FFA500;
   letter-spacing: 0.1em;
 }
 
@@ -138,8 +138,8 @@ body::before {
 }
 
 .input-group-custom:focus-within {
-  border-color: #58a6ff;
-  box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
+  border-color: #FFA500;
+  box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.1);
 }
 
 .form-control {
@@ -187,14 +187,14 @@ body::before {
 }
 
 .card:hover {
-  border-color: #58a6ff;
+  border-color: #FFA500;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(255, 165, 0, 0.2);
 }
 
 .display-5 {
   font-weight: 700;
-  color: #58a6ff;
+  color: #FFA500;
   font-family: 'JetBrains Mono', monospace;
   font-size: 2.5rem;
 }
@@ -246,13 +246,13 @@ p, li {
 }
 
 a {
-  color: #58a6ff;
+  color: #FFA500;
   text-decoration: none;
   transition: all 0.2s;
 }
 
 a:hover {
-  color: #79c0ff;
+  color: #FFD700;
   text-decoration: underline;
 }
 
@@ -262,7 +262,7 @@ code {
   border: 1px solid #30363d;
   padding: 3px 8px;
   border-radius: 3px;
-  color: #79c0ff;
+  color: #FFA500;
   font-family: 'JetBrains Mono', 'Courier New', monospace;
   font-size: 0.9em;
 }
@@ -288,14 +288,14 @@ ul, ol {
 }
 
 li::marker {
-  color: #58a6ff;
+  color: #FFA500;
 }
 
 /* TIMELINE (for roadmap) */
 .timeline-item {
   background: rgba(22, 27, 34, 0.6);
   border: 1px solid #30363d;
-  border-left: 3px solid #58a6ff;
+  border-left: 3px solid #FFA500;
   padding: 24px;
   margin-bottom: 20px;
   border-radius: 6px;
@@ -303,7 +303,7 @@ li::marker {
 }
 
 .timeline-item:hover {
-  border-color: #58a6ff;
+  border-color: #FFA500;
   transform: translateX(4px);
 }
 
@@ -316,14 +316,14 @@ li::marker {
 .timeline-item .status {
   display: inline-block;
   padding: 4px 12px;
-  background: rgba(88, 166, 255, 0.1);
-  border: 1px solid #58a6ff;
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid #FFA500;
   border-radius: 3px;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 12px;
-  color: #58a6ff;
+  color: #FFA500;
   font-weight: 600;
 }
 
@@ -343,7 +343,7 @@ li::marker {
   content: '→';
   position: absolute;
   left: 0;
-  color: #58a6ff;
+  color: #FFA500;
   font-weight: 700;
 }
 
