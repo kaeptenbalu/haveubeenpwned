@@ -86,12 +86,12 @@ body::before {
 
 /* HERO */
 .hero {
-  padding: 80px 20px 60px;
+  padding: 100px 20px 80px;
   text-align: center;
 }
 
 .logo-container {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
 }
 
 .logo-main {
@@ -146,8 +146,8 @@ body::before {
   background: transparent;
   border: none;
   color: #c9d1d9;
-  padding: 16px 20px;
-  font-size: 1rem;
+  padding: 20px 24px;
+  font-size: 1.1rem;
 }
 
 .form-control::placeholder {
@@ -166,7 +166,8 @@ body::before {
   border: 1px solid rgba(240, 246, 252, 0.1);
   color: #ffffff;
   font-weight: 600;
-  padding: 16px 32px;
+  padding: 20px 40px;
+  font-size: 1.1rem;
   transition: all 0.2s ease;
   border-radius: 0 6px 6px 0;
 }
