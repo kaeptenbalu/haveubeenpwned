@@ -8,84 +8,25 @@
 <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-<!-- Switzer Font -->
-<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700&display=swap" rel="stylesheet">
+<!-- CSS -->
+<link rel="stylesheet" href="/css/style.css">
 
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <style>
-/* ===== GLOBAL ===== */
-body {
-  font-family: 'Switzer', sans-serif;
-  background-color: #030304;
-  color: #f6f8fa;
-  letter-spacing: 0.01rem;
-  min-height: 100vh;
-}
 
-/* Glow Background */
-body::before {
-  content: "";
-  position: fixed;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(circle, rgba(29,114,167,0.4) 0%, transparent 70%);
-  filter: blur(100px);
-  z-index: -1;
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-  background: rgba(3,3,4,0.8);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 0.5rem 1.5rem;
-}
-
-.nav-link {
-  color: #fff !important;
-  font-weight: 500;
-}
-
-.nav-link:hover {
-  color: #ffffffb3 !important;
-}
-
-.nav-logo {
-  height: 140px !important;
-  width: auto;
-  display: block;
-}
-
-/* ===== SECTION ===== */
-.section-header {
-  text-align: center;
-  padding: 60px 20px 40px;
-}
-
-.section-header h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
-
-.section-header p {
-  color: #9cb1c2;
-  font-size: 1.2rem;
-}
-
-/* ===== CARD ===== */
 .stat-card {
-  background: #0b0f14;
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
+  background: rgba(22, 27, 34, 0.6);
+  border: 1px solid #30363d;
+  border-radius: 6px;
   padding: 30px;
   margin-bottom: 30px;
-  box-shadow: 0 0 40px rgba(29,114,167,0.15);
+  transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+  border-color: #58a6ff;
 }
 
 .stat-card h3 {
@@ -95,19 +36,21 @@ body::before {
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #c9d1d9;
 }
 
 .info-icon {
   display: inline-block;
   width: 20px;
   height: 20px;
-  background: rgba(29,114,167,0.3);
+  background: rgba(88, 166, 255, 0.2);
   border-radius: 50%;
   text-align: center;
   line-height: 20px;
   font-size: 14px;
   cursor: help;
   position: relative;
+  color: #58a6ff;
 }
 
 .info-icon:hover .tooltip-text {
@@ -118,11 +61,12 @@ body::before {
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
-  background: #1d72a7;
-  color: white;
+  background: rgba(22, 27, 34, 0.98);
+  border: 1px solid #58a6ff;
+  color: #c9d1d9;
   text-align: left;
-  border-radius: 8px;
-  padding: 10px 15px;
+  border-radius: 6px;
+  padding: 12px 16px;
   position: absolute;
   z-index: 1000;
   bottom: 125%;
@@ -132,7 +76,7 @@ body::before {
   font-size: 13px;
   line-height: 1.5;
   transition: opacity 0.3s;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
 .tooltip-text::after {
@@ -143,14 +87,15 @@ body::before {
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #1d72a7 transparent transparent transparent;
+  border-color: #58a6ff transparent transparent transparent;
 }
 
 .big-number {
   font-size: 3.5rem;
   font-weight: 700;
-  color: #1d72a7;
+  color: #58a6ff;
   margin: 20px 0;
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .chart-container {
@@ -159,13 +104,19 @@ body::before {
   margin-top: 20px;
 }
 
-/* ===== FOOTER ===== */
-footer {
-  margin-top: 80px;
-  padding: 30px;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  text-align: center;
-  color: #9cb1c2;
+.btn-primary {
+  background: #238636;
+  border: 1px solid rgba(240, 246, 252, 0.1);
+  color: #ffffff;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #2ea043;
+  color: #ffffff;
 }
 </style>
 </head>
@@ -173,16 +124,17 @@ footer {
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg container mt-3">
+<nav class="navbar navbar-expand-lg container-fluid">
   <a class="navbar-brand" href="/">
-    <img src="https://raw.githubusercontent.com/kaeptenbalu/howweak/refs/heads/main/static/img/logo.png" class="nav-logo">
+    <span class="nav-logo-text">HowWeak</span>
   </a>
 
-  <button class="navbar-toggler bg-light" data-bs-toggle="collapse" data-bs-target="#nav"></button>
+  <button class="navbar-toggler" style="border: 1px solid #30363d;" data-bs-toggle="collapse" data-bs-target="#nav">
+    <span style="color: #58a6ff;">☰</span>
+  </button>
 
   <div class="collapse navbar-collapse" id="nav">
-    <ul class="navbar-nav mx-auto">
-      <li class="nav-item"><a class="nav-link" href="/bulk/">Bulk Check</a></li>
+    <ul class="navbar-nav ms-auto">
       <li class="nav-item"><a class="nav-link" href="/roadmap/">Roadmap</a></li>
       <li class="nav-item"><a class="nav-link" href="/costs/">Costs</a></li>
       <li class="nav-item"><a class="nav-link" href="/about/">About</a></li>
@@ -192,10 +144,10 @@ footer {
 </nav>
 
 <!-- HEADER -->
-<section class="section-header">
-  <div class="container">
+<section class="content">
+  <div class="container text-center">
     <h1>Password Research</h1>
-    <p>Analyzing password patterns from user submissions</p>
+    <p style="color: #8b949e; font-size: 1.1rem; margin-bottom: 50px;">Analyzing password patterns from user submissions</p>
   </div>
 </section>
 
@@ -296,11 +248,11 @@ footer {
               <span class="tooltip-text">Get the raw statistics data in JSON format. Perfect for building your own visualizations or analysis tools.</span>
             </span>
           </h3>
-          <p style="color: #9cb1c2; margin-bottom: 20px;">
+          <p style="color: #8b949e; margin-bottom: 20px;">
             Use our API endpoint to access real-time statistics data
           </p>
-          <div style="background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 20px; margin: 20px 0;">
-            <code style="color: #1d72a7; font-size: 16px;">
+          <div style="background: rgba(22, 27, 34, 0.8); border: 1px solid #30363d; border-radius: 6px; padding: 20px; margin: 20px 0;">
+            <code style="color: #79c0ff; font-size: 16px;">
               https://muddy-scene-9bdf.howweak.workers.dev/stats
             </code>
           </div>
@@ -315,7 +267,7 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  © 2026 Awareness Project | Data updated in real-time (UTC timezone)
+  © 2026 HowWeak · Open Source Password Security | Data updated in real-time (UTC timezone)
 </footer>
 
 <!-- SCRIPT -->
@@ -341,7 +293,7 @@ async function loadStats() {
             data.time_afternoon || 0,
             data.time_evening || 0
           ],
-          backgroundColor: ['#1d72a7', '#2a8fd6', '#4da8e8']
+          backgroundColor: ['#58a6ff', '#79c0ff', '#a5d6ff']
         }]
       },
       options: {
@@ -351,8 +303,8 @@ async function loadStats() {
           legend: { display: false }
         },
         scales: {
-          y: { beginAtZero: true, ticks: { color: '#9cb1c2' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          x: { ticks: { color: '#9cb1c2' }, grid: { display: false } }
+          y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+          x: { ticks: { color: '#8b949e' }, grid: { display: false } }
         }
       }
     });
@@ -375,7 +327,7 @@ async function loadStats() {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
-          legend: { position: 'bottom', labels: { color: '#9cb1c2' } }
+          legend: { position: 'bottom', labels: { color: '#8b949e' } }
         }
       }
     });
@@ -402,8 +354,8 @@ async function loadStats() {
           legend: { display: false }
         },
         scales: {
-          y: { beginAtZero: true, ticks: { color: '#9cb1c2' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          x: { ticks: { color: '#9cb1c2' }, grid: { display: false } }
+          y: { beginAtZero: true, ticks: { color: '#8b949e' }, grid: { color: '#21262d' } },
+          x: { ticks: { color: '#8b949e' }, grid: { display: false } }
         }
       }
     });
@@ -421,7 +373,7 @@ async function loadStats() {
             data.special_true || 0,
             data.special_false || 0
           ],
-          backgroundColor: ['#1d72a7', '#5a6c7d', '#2a8fd6', '#5a6c7d']
+          backgroundColor: ['#58a6ff', '#6e7681', '#79c0ff', '#6e7681']
         }]
       },
       options: {
@@ -432,7 +384,7 @@ async function loadStats() {
         },
         scales: {
           y: { beginAtZero: true, ticks: { color: '#9cb1c2' }, grid: { color: 'rgba(255,255,255,0.05)' } },
-          x: { ticks: { color: '#9cb1c2', font: { size: 11 } }, grid: { display: false } }
+          x: { ticks: { color: '#8b949e', font: { size: 11 } }, grid: { display: false } }
         }
       }
     });
