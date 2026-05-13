@@ -47,6 +47,15 @@
         When you enter a password, the <strong style="color: #FFA500;">security analysis</strong> happens entirely in your browser.
         Your password never leaves your device. The analysis checks multiple security criteria based on current standards (NIST, BSI).
       </p>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        Additionally, a <strong style="color: #FFA500;">SHA-256 hash</strong> of your password is generated in your browser and sent to our
+        Cloudflare Worker. The Worker compares this hash against millions of known weak password hashes.
+      </p>
+      <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
+        <strong style="color: #FFA500;">Important:</strong> If your password matches any known weak password, your security score is
+        automatically set to <strong style="color: #e74c3c;">0 points</strong> — regardless of length or complexity. Known weak passwords
+        are trivial to crack, even if they appear strong.
+      </p>
 
       <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">Scoring Method</h2>
       <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
