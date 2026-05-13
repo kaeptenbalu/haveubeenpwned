@@ -141,7 +141,7 @@ async function hashPassword(pw) {
 // ===== CHECK WEAK PASSWORD =====
 async function checkWeakPassword(hash) {
   try {
-    const response = await fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/check", {
+    const response = await fetch("https://withered-cake-20e4.howweak-api.workers.dev/check", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({ hash: hash })
@@ -275,7 +275,7 @@ async function submitPassword() {
 
   // Send anonymous statistics to worker (NO password, only analysis results)
   try {
-    await fetch("https://muddy-scene-9bdf.haveubeenpwned.workers.dev/analyze", {
+    await fetch("https://withered-cake-20e4.howweak-api.workers.dev/analyze", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
