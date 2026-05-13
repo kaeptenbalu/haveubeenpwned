@@ -45,12 +45,13 @@
 
       <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">How It Works</h2>
       <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
-        When you enter a password, a <strong style="color: #FFA500;">cryptographic hash</strong> (SHA-256) is generated in your browser.
-        Only this hash is sent to our Cloudflare Worker for analysis.
+        When you enter a password, the <strong style="color: #FFA500;">complexity analysis</strong> (length, uppercase/lowercase letters,
+        numbers, special characters) happens entirely in your browser. Your password never leaves your device.
       </p>
       <p style="color: #8b949e; font-size: 1.05rem; line-height: 1.8; margin-bottom: 15px;">
-        The Worker compares the hash against millions of known weak passwords and evaluates password
-        strength based on length, complexity, and security best practices. The result is sent back to your browser.
+        For the comparison against known weak passwords, a <strong style="color: #FFA500;">cryptographic hash</strong> (SHA-256)
+        is generated in your browser. Only this hash is sent to our Cloudflare Worker, where it's checked against millions
+        of known weak password hashes. The result is sent back to your browser.
       </p>
 
       <h2 style="font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px;">Privacy & Security</h2>

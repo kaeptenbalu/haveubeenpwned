@@ -173,6 +173,7 @@ async function submitPassword() {
 
     let rating = 'Weak';
     if (pw.length >= 12 && complexity === 'high') rating = 'Strong';
+    else if (pw.length >= 12 && complexity === 'medium') rating = 'Medium';
     else if (pw.length >= 8 && complexity !== 'low') rating = 'Medium';
 
     const singleResult = [{
