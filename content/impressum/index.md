@@ -1,3 +1,4 @@
 ---
 title: "Impressum"
+layout: "impressum"
 ---
