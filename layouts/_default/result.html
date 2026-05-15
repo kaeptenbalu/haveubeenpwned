@@ -241,9 +241,11 @@ function displayAnalysis(analysis) {
 
   // Display checks
   const checksContainer = document.getElementById('checksContainer');
+  const entropyBits = analysis.entropy ? Math.round(analysis.entropy * 10) / 10 : 0;
   const checks = [
     { condition: !analysis.isKnownWeak, text: 'Not found in known weak password databases', critical: true },
     { condition: analysis.length >= 12, text: `Password length: ${analysis.length} characters` },
+    { condition: entropyBits >= 60, text: `Password entropy: ${entropyBits} bits` },
     { condition: analysis.hasUpper, text: 'Contains uppercase letters (A-Z)' },
     { condition: analysis.hasLower, text: 'Contains lowercase letters (a-z)' },
     { condition: analysis.hasNumber, text: 'Contains numbers (0-9)' },

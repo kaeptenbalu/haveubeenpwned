@@ -129,6 +129,23 @@
 <!-- SCRIPT -->
 <script>
 
+// ===== CALCULATE ENTROPY =====
+function calculateEntropy(pw) {
+  if (!pw) return 0;
+
+  // Count character set size
+  let charsetSize = 0;
+  if (/[a-z]/.test(pw)) charsetSize += 26; // lowercase
+  if (/[A-Z]/.test(pw)) charsetSize += 26; // uppercase
+  if (/\d/.test(pw)) charsetSize += 10;    // digits
+  if (/[^A-Za-z0-9]/.test(pw)) charsetSize += 33; // special chars (approx)
+
+  // Shannon entropy: H = L * log2(N)
+  // where L = password length, N = character set size
+  const entropy = pw.length * Math.log2(charsetSize);
+  return entropy;
+}
+
 // ===== HASH PASSWORD =====
 async function hashPassword(pw) {
   const encoder = new TextEncoder();
@@ -170,8 +187,10 @@ async function submitPassword() {
     const isKnownWeak = await checkWeakPassword(hash);
 
   // Analyze password based on current security standards
+  const entropy = calculateEntropy(pw);
   const analysis = {
     length: pw.length,
+    entropy: entropy,
     hasUpper: /[A-Z]/.test(pw),
     hasLower: /[a-z]/.test(pw),
     hasNumber: /\d/.test(pw),
@@ -194,6 +213,24 @@ async function submitPassword() {
     analysis.recommendations.push({
       type: 'warning',
       message: 'Password length is acceptable, but 12+ characters is recommended for better security.'
+    });
+  }
+
+  // Check entropy (highly weighted factor)
+  if (entropy < 28) {
+    analysis.recommendations.push({
+      type: 'critical',
+      message: 'Password entropy is very low. Use a longer password with more character variety.'
+    });
+  } else if (entropy < 50) {
+    analysis.recommendations.push({
+      type: 'warning',
+      message: 'Password entropy is moderate. Consider using more character types and length.'
+    });
+  } else if (entropy < 60) {
+    analysis.recommendations.push({
+      type: 'info',
+      message: 'Good entropy. For excellent security, aim for 60+ bits of entropy.'
     });
   }
 
@@ -252,14 +289,26 @@ async function submitPassword() {
       message: 'This password appears in known weak password databases. It is extremely vulnerable and should never be used!'
     });
   } else {
-    if (pw.length >= 8) score += 20;
-    if (pw.length >= 12) score += 20;
+    // Length scoring (max 30 points)
+    if (pw.length >= 8) score += 10;
+    if (pw.length >= 12) score += 10;
     if (pw.length >= 16) score += 10;
-    if (analysis.hasUpper) score += 10;
-    if (analysis.hasLower) score += 10;
-    if (analysis.hasNumber) score += 10;
-    if (analysis.hasSpecial) score += 15;
-    if (!analysis.hasRepeatingChars) score += 5;
+
+    // Entropy scoring (max 40 points - highly weighted!)
+    if (entropy >= 28) score += 10;
+    if (entropy >= 40) score += 10;
+    if (entropy >= 50) score += 10;
+    if (entropy >= 60) score += 10;
+
+    // Character variety (max 25 points)
+    if (analysis.hasUpper) score += 6;
+    if (analysis.hasLower) score += 6;
+    if (analysis.hasNumber) score += 6;
+    if (analysis.hasSpecial) score += 7;
+
+    // Pattern penalties/bonuses (max 5 points)
+    if (!analysis.hasRepeatingChars) score += 3;
+    if (!analysis.hasSequentialNumbers) score += 2;
   }
 
   analysis.score = score;
@@ -281,6 +330,7 @@ async function submitPassword() {
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({
         length: analysis.length,
+        entropy: Math.round(analysis.entropy * 10) / 10, // round to 1 decimal
         has_upper: analysis.hasUpper,
         has_lower: analysis.hasLower,
         has_number: analysis.hasNumber,
