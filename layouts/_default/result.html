@@ -253,11 +253,20 @@ function displayAnalysis(analysis) {
       neutral: true
     });
   } else {
-    checks.push({
-      condition: !analysis.isKnownWeak,
-      text: 'Not found in known weak password databases',
-      critical: true
-    });
+    // Show clear status: found or not found
+    if (analysis.isKnownWeak) {
+      checks.push({
+        condition: false,
+        text: 'Found in known weak password databases',
+        critical: true
+      });
+    } else {
+      checks.push({
+        condition: true,
+        text: 'Not found in known weak password databases',
+        critical: false
+      });
+    }
   }
 
   checks.push(
