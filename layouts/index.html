@@ -114,6 +114,13 @@
 
         </div>
 
+        <div style="margin-top: 20px; text-align: center;">
+          <label style="color: #8b949e; font-size: 0.95rem; cursor: pointer; user-select: none;">
+            <input type="checkbox" id="offlineMode" style="margin-right: 8px; cursor: pointer;">
+            <span style="color: #c9d1d9;">Offline Mode</span> - Hash never leaves your device (no breach database check)
+          </label>
+        </div>
+
       </div>
     </div>
 
@@ -176,15 +183,19 @@ async function checkWeakPassword(hash) {
 async function submitPassword() {
   try {
     const pw = document.getElementById("password").value;
+    const offlineMode = document.getElementById("offlineMode").checked;
 
     if (!pw) {
       alert("Enter password");
       return;
     }
 
-    // Generate hash and check against weak password list
-    const hash = await hashPassword(pw);
-    const isKnownWeak = await checkWeakPassword(hash);
+    // Generate hash and check against weak password list (only if not in offline mode)
+    let isKnownWeak = false;
+    if (!offlineMode) {
+      const hash = await hashPassword(pw);
+      isKnownWeak = await checkWeakPassword(hash);
+    }
 
   // Analyze password based on current security standards
   const entropy = calculateEntropy(pw);
