@@ -242,8 +242,25 @@ function displayAnalysis(analysis) {
   // Display checks
   const checksContainer = document.getElementById('checksContainer');
   const entropyBits = analysis.entropy ? Math.round(analysis.entropy * 10) / 10 : 0;
-  const checks = [
-    { condition: !analysis.isKnownWeak, text: 'Not found in known weak password databases', critical: true },
+
+  const checks = [];
+
+  // Breach database check - different message for offline mode
+  if (analysis.offlineMode) {
+    checks.push({
+      condition: null,
+      text: 'Breach database check skipped (offline mode enabled)',
+      neutral: true
+    });
+  } else {
+    checks.push({
+      condition: !analysis.isKnownWeak,
+      text: 'Not found in known weak password databases',
+      critical: true
+    });
+  }
+
+  checks.push(
     { condition: analysis.length >= 12, text: `Password length: ${analysis.length} characters` },
     { condition: entropyBits >= 60, text: `Password entropy: ${entropyBits} bits` },
     { condition: analysis.hasUpper, text: 'Contains uppercase letters (A-Z)' },
@@ -252,24 +269,37 @@ function displayAnalysis(analysis) {
     { condition: analysis.hasSpecial, text: 'Contains special characters (!@#$%...)' },
     { condition: !analysis.hasRepeatingChars, text: 'No repeating character patterns' },
     { condition: !analysis.hasSequentialNumbers, text: 'No sequential number patterns' }
-  ];
+  );
 
   checks.forEach(check => {
     const div = document.createElement('div');
     div.className = 'check-item';
 
-    // Highlight critical checks (known weak password)
-    if (check.critical && !check.condition) {
-      div.style.borderColor = '#e74c3c';
-      div.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+    // Neutral check (offline mode)
+    if (check.neutral) {
+      div.style.borderColor = '#8b949e';
+      div.style.backgroundColor = 'rgba(139, 148, 158, 0.1)';
+      div.innerHTML = `
+        <div class="check-icon" style="background: #8b949e; color: #0d1117;">
+          ℹ
+        </div>
+        <div class="check-text">${check.text}</div>
+      `;
+    } else {
+      // Highlight critical checks (known weak password)
+      if (check.critical && !check.condition) {
+        div.style.borderColor = '#e74c3c';
+        div.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+      }
+
+      div.innerHTML = `
+        <div class="check-icon ${check.condition ? 'check-pass' : 'check-fail'}">
+          ${check.condition ? '✓' : '✗'}
+        </div>
+        <div class="check-text">${check.text}</div>
+      `;
     }
 
-    div.innerHTML = `
-      <div class="check-icon ${check.condition ? 'check-pass' : 'check-fail'}">
-        ${check.condition ? '✓' : '✗'}
-      </div>
-      <div class="check-text">${check.text}</div>
-    `;
     checksContainer.appendChild(div);
   });
 

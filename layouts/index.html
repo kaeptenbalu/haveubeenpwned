@@ -209,6 +209,7 @@ async function submitPassword() {
     hasRepeatingChars: /(.)\1{2,}/.test(pw), // 3+ same chars in a row
     hasSequentialNumbers: /(012|123|234|345|456|567|678|789|890)/.test(pw),
     isKnownWeak: isKnownWeak,
+    offlineMode: offlineMode,
 
     // Recommendations based on checks
     recommendations: []
