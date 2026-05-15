@@ -245,11 +245,11 @@ function displayAnalysis(analysis) {
 
   const checks = [];
 
-  // Breach database check - different message for offline mode
+  // Weak password database check - different message for offline mode
   if (analysis.offlineMode) {
     checks.push({
       condition: null,
-      text: 'Breach database check skipped (offline mode enabled)',
+      text: 'Comparison with known weak password databases skipped (offline mode)',
       neutral: true
     });
   } else {
